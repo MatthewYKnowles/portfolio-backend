@@ -9,7 +9,6 @@ phases:
   post_build:
     commands:
       - echo `ls`
-      - 'aws s3 cp NestedStacks s3://${PIPELINE_BUCKET}/NestedStacks --recursive'
       - cd Portfolio.Backend/bin/Release/netcoreapp2.1/publish/
       - echo Build completed on `date`
 artifacts:
