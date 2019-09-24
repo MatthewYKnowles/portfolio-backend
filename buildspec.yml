@@ -1,0 +1,18 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - dotnet restore
+  build:
+    commands:
+      - dotnet publish -c Release /p:GenerateRuntimeConfigurationFiles=true
+  post_build:
+    commands:
+      - echo `ls`
+      - 'aws s3 cp NestedStacks s3://${PIPELINE_BUCKET}/NestedStacks --recursive'
+      - cd Portfolio.Backend/bin/Release/netcoreapp2.1/publish/
+      - echo Build completed on `date`
+artifacts:
+  files:
+    - Portfolio.Backend/bin/Release/netcoreapp2.1/publish/*
+  discard-paths: yes

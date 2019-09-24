@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: 2010-09-09
+Parameters:
+	buildBucketName:
+		Type: String
+	buildObjectKey:
+		Type: String
+	environment:
+		Type: String
+Resources:
+	AddConnectFourMatch:
+		Type: 'AWS::Lambda::Function'
+		Properties:
+			Handler: Portfolio.Backend::Portfolio.Backend.ConnectFour.ConnectFourFunctions::AddConnectFourMatch
+			Runtime: "dotnetcore2.1"
+			Code:
+				S3Bucket: !Ref buildBucketName
+				S3Key: !Ref buildObjectKey
+			Role: !ImportValue AddConnectFourMatchRole
+	AddConnectFourMatchPermission:
+		Type: 'AWS::Lambda::Permission'
+		Properties:
+			Action: 'lambda:invokeFunction'
+			FunctionName: {"Fn::Sub":"${AddConnectFourMatch.Arn}"}
+			Principal: apigateway.amazonaws.com
+			SourceArn: {"Fn::Sub":"arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${PortfolioApi}/*"}
+	PortfolioApi:
+		Type: 'AWS::ApiGateway::RestApi'
+		Properties:
+			Name: Portfolio API
+			FailOnWarnings: true

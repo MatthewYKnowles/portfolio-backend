@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Backend.Lambda", "Portfolio.Backend.Lambda\Portfolio.Backend.Lambda.csproj", "{67955A55-301C-471D-8DA1-4CC7648F09E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{652C4AD3-6214-4DE2-BF51-95CC4D68151E}"
+ProjectSection(SolutionItems) = preProject
+	buildspec.yml = buildspec.yml
+	iam.template.yml = iam.template.yml
+	serverless.template.yml = serverless.template.yml
+	.gitignore = .gitignore
+EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67955A55-301C-471D-8DA1-4CC7648F09E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67955A55-301C-471D-8DA1-4CC7648F09E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67955A55-301C-471D-8DA1-4CC7648F09E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67955A55-301C-471D-8DA1-4CC7648F09E0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

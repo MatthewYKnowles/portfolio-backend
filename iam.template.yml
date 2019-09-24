@@ -1,0 +1,12 @@
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  AddConnectFourMatchRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument: {Version: '2012-10-17', Statement: [{Effect: Allow, Principal: {Service: [lambda.amazonaws.com]}, Action: ['sts:AssumeRole']}]}
+  WriteConnectFourMatchesPolicy:
+    Type: 'AWS::IAM::Policy'
+    Properties:
+      PolicyName: WriteToConnectFourRecordPolicy
+      PolicyDocument: {Version: '2012-10-17', Statement: [{Effect: Allow, Action: ['dynamodb:BatchGetItem', 'dynamodb:BatchWriteItem', 'dynamodb:PutItem', 'dynamodb:DeleteItem', 'dynamodb:Scan', 'dynamodb:CreateBackup', 'dynamodb:DescribeStream', 'dynamodb:Query', 'dynamodb:UpdateItem', 'dynamodb:DeleteTable', 'dynamodb:CreateTable', 'dynamodb:DescribeTable', 'dynamodb:GetShardIterator', 'dynamodb:RestoreTableFromBackup', 'dynamodb:GetItem', 'dynamodb:DescribeContinuousBackups', 'dynamodb:DeleteBackup', 'dynamodb:DescribeBackup', 'dynamodb:UpdateTable', 'dynamodb:GetRecords'], Resource: {'Fn::Sub': 'arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ConnectFourMatches'}}, {Effect: Allow, Action: ['dynamodb:DescribeReservedCapacityOfferings', 'dynamodb:TagResource', 'dynamodb:UntagResource', 'dynamodb:ListTables', 'dynamodb:DescribeReservedCapacity', 'dynamodb:ListBackups', 'dynamodb:PurchaseReservedCapacityOfferings', 'dynamodb:ListTagsOfResource', 'dynamodb:DescribeTimeToLive', 'dynamodb:DescribeLimits', 'dynamodb:ListStreams'], Resource: '*'}]}
+      Roles: [!Ref AddConnectFourMatchRole]
