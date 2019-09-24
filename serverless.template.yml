@@ -4,8 +4,6 @@ Parameters:
 		Type: String
 	buildObjectKey:
 		Type: String
-	environment:
-		Type: String
 Resources:
 	AddConnectFourMatch:
 		Type: 'AWS::Lambda::Function'
