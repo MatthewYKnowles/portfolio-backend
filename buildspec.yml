@@ -9,9 +9,9 @@ phases:
   post_build:
     commands:
       - echo `ls`
-      - cd Portfolio.Backend/bin/Release/netcoreapp2.1/publish/
+      - cd Portfolio.Backend.Lambda/bin/Release/netcoreapp2.1/publish/
       - echo Build completed on `date`
 artifacts:
   files:
-    - Portfolio.Backend/bin/Release/netcoreapp2.1/publish/*
+    - Portfolio.Backend.Lambda/bin/Release/netcoreapp2.1/publish/*
   discard-paths: yes
