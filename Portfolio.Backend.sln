@@ -10,6 +10,10 @@ ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Backend.Domain", "Portfolio.Backend.Domain\Portfolio.Backend.Domain.csproj", "{27E29A80-86C3-47F2-92C6-0C1CA8E3D22F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Backend.Data", "Portfolio.Backend.Data\Portfolio.Backend.Data.csproj", "{93CF169B-207A-4567-A634-5A8D24F51512}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,5 +24,13 @@ Global
 		{67955A55-301C-471D-8DA1-4CC7648F09E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67955A55-301C-471D-8DA1-4CC7648F09E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67955A55-301C-471D-8DA1-4CC7648F09E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27E29A80-86C3-47F2-92C6-0C1CA8E3D22F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27E29A80-86C3-47F2-92C6-0C1CA8E3D22F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27E29A80-86C3-47F2-92C6-0C1CA8E3D22F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27E29A80-86C3-47F2-92C6-0C1CA8E3D22F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93CF169B-207A-4567-A634-5A8D24F51512}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93CF169B-207A-4567-A634-5A8D24F51512}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93CF169B-207A-4567-A634-5A8D24F51512}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93CF169B-207A-4567-A634-5A8D24F51512}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
