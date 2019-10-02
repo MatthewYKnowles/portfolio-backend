@@ -9,7 +9,7 @@ namespace Portfolio.Backend.Data.Internal
         {
             var dbClient = new AmazonDynamoDBClient();
             var context = new DynamoDBContext(dbClient);
-            var connectFourMatch = new ConnectFourMatch()
+            var connectFourMatch = new ConnectFourMatch
             {
                 PlayerOneName = playerOneName,
                 PlayerTwoName = playerTwoName,
