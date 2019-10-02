@@ -8,7 +8,7 @@ Resources:
   AddConnectFourMatch:
     Type: 'AWS::Lambda::Function'
     Properties:
-      Handler: Portfolio.Backend::Portfolio.Backend.ConnectFour.ConnectFourFunctions::AddConnectFourMatch
+      Handler: Portfolio.Backend::Portfolio.Backend.Lambda.ConnectFour.ConnectFourFunctions::AddConnectFourMatch
       Runtime: "dotnetcore2.1"
       Code:
         S3Bucket: !Ref buildBucketName
