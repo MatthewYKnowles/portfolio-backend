@@ -75,6 +75,8 @@ Resources:
           - StatusCode: '200'
             ResponseParameters:
               method.response.header.Access-Control-Allow-Origin: "'*'"
+        RequestTemplates:
+          application/json: '{"PlayerOneName": "$input.path(''playerOneName'')", "PlayerTwoName": "$input.path(''playerTwoName'')", "GameResult": "$input.path(''gameResult'')", "WinningPlayer": "$input.path(''winningPlayer'')"}'
       RestApiId: !Ref PortfolioApi
       ResourceId: !Ref ConnectFourResource
       MethodResponses:
