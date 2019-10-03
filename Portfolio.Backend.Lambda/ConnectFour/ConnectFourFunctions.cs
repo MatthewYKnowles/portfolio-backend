@@ -11,8 +11,7 @@ namespace Portfolio.Backend.Lambda.ConnectFour
         {
             var connectFourMatchesRepository = new ConnectFourMatchesRepository();
             var addConnectFourMatch = new AddConnectFourMatch(connectFourMatchesRepository);
-            addConnectFourMatch.Execute(request.PlayerOneName, request.PlayerTwoName, request.GameResult,
-                request.WinningPlayer);
+            addConnectFourMatch.Execute(request.PlayerOneName, request.PlayerTwoName, request.GameResult, request.WinningPlayer);
         }
     }
 
