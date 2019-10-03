@@ -31,7 +31,7 @@ Resources:
     Type: 'AWS::ApiGateway::Resource'
     Properties:
       RestApiId: !Ref PortfolioApi
-      ParentId: !GetAtt PortalApi.RootResourceId
+      ParentId: !GetAtt PortfolioApi.RootResourceId
       PathPart: connectFour
   ConnectFourOptions:
     Type: 'AWS::ApiGateway::Method'
