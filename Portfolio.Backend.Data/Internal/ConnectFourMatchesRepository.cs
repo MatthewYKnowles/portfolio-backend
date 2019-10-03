@@ -25,12 +25,10 @@ namespace Portfolio.Backend.Data.Internal
     [DynamoDBTable("ConnectFourMatches")]
     public class ConnectFourMatch
     {
-        [DynamoDBHashKey]
-        public string Id { get; set; }
-        [DynamoDBHashKey] public string PlayerOneName { get; set; }
+        [DynamoDBHashKey] public string Id { get; set; }
+        [DynamoDBProperty] public string PlayerOneName { get; set; }
         [DynamoDBProperty] public string PlayerTwoName { get; set; }
         [DynamoDBProperty] public string GameResult { get; set; }
         [DynamoDBProperty] public string WinningPlayer { get; set; }
-        public Guid MatchId { get; set; }
     }
 }
