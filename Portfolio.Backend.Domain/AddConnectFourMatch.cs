@@ -1,3 +1,4 @@
+using System;
 using Portfolio.Backend.Data;
 
 namespace Portfolio.Backend.Domain
@@ -13,7 +14,8 @@ namespace Portfolio.Backend.Domain
 
         public void Execute(string playerOneName, string playerTwoName, string gameResult, string winningPlayer)
         {
-            connectFourMatchesRepository.SaveConnectFourMatch(playerOneName, playerTwoName, gameResult, winningPlayer);
+            var id = Guid.NewGuid().ToString();
+            connectFourMatchesRepository.SaveConnectFourMatch(id, playerOneName, playerTwoName, gameResult, winningPlayer);
         }
     }
 }
