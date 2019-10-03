@@ -61,8 +61,8 @@ Resources:
             method.response.header.Access-Control-Allow-Headers: false
             method.response.header.Access-Control-Allow-Methods: false
             method.response.header.Access-Control-Allow-Origin: false
-  UserGet:
-    DependsOn: GetAllUsers
+  ConnectFourPost:
+    DependsOn: AddConnectFourMatch
     Type: 'AWS::ApiGateway::Method'
     Properties:
       AuthorizationType: NONE
@@ -75,8 +75,8 @@ Resources:
           - StatusCode: '200'
             ResponseParameters:
               method.response.header.Access-Control-Allow-Origin: "'*'"
-      ResourceId: !Ref UserResource
-      RestApiId: !Ref restApiId
+      RestApiId: !Ref PortfolioApi
+      ResourceId: !Ref ConnectFourResource
       MethodResponses:
         - StatusCode: '200'
           ResponseParameters:
