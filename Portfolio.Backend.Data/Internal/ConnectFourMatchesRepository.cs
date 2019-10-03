@@ -12,7 +12,7 @@ namespace Portfolio.Backend.Data.Internal
             var context = new DynamoDBContext(dbClient);
             var connectFourMatch = new ConnectFourMatch
             {
-                Id = id,
+                MatchId = id,
                 PlayerOneName = playerOneName,
                 PlayerTwoName = playerTwoName,
                 GameResult = gameResult,
@@ -25,7 +25,7 @@ namespace Portfolio.Backend.Data.Internal
     [DynamoDBTable("ConnectFourMatches")]
     public class ConnectFourMatch
     {
-        [DynamoDBHashKey] public string Id { get; set; }
+        [DynamoDBHashKey] public string MatchId { get; set; }
         [DynamoDBProperty] public string PlayerOneName { get; set; }
         [DynamoDBProperty] public string PlayerTwoName { get; set; }
         [DynamoDBProperty] public string GameResult { get; set; }
