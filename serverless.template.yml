@@ -22,6 +22,23 @@ Resources:
       FunctionName: !Sub "${AddConnectFourMatch.Arn}"
       Principal: apigateway.amazonaws.com
       SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${PortfolioApi}/*"
+  AddConferenceTalk:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      Handler: Portfolio.Backend.Lambda::Portfolio.Backend.Lambda.ConferenceTalks.ConferenceTalksFunctions::AddConferenceTalk
+      Runtime: "dotnetcore2.1"
+      Code:
+        S3Bucket: !Ref buildBucketName
+        S3Key: !Ref buildObjectKey
+      Timeout: 30
+      Role: !ImportValue AddConferenceTalkRole
+  AddConferenceTalkPermission:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      Action: 'lambda:invokeFunction'
+      FunctionName: !Sub "${AddConferenceTalk.Arn}"
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${PortfolioApi}/*"
   PortfolioApi:
     Type: 'AWS::ApiGateway::RestApi'
     Properties:
