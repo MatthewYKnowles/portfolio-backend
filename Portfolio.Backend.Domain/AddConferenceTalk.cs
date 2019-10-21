@@ -12,10 +12,11 @@ namespace Portfolio.Backend.Domain
             this.conferenceTalksRepository = conferenceTalksRepository;
         }
 
-        public void Execute(string conferenceTitle, string conferenceCity, string conferenceUrl, string talkTitle, string talkUrl, string videoUrl)
+        public void Execute(string conferenceTitle, string conferenceCity, string conferenceUrl, string talkTitle,
+            string talkUrl, string videoUrl, DateTime talkDate)
         {
             var id = Guid.NewGuid().ToString();
-            conferenceTalksRepository.SaveTalk(id, conferenceTitle, conferenceCity, conferenceUrl, talkTitle, talkUrl, videoUrl);
+            conferenceTalksRepository.SaveTalk(id, conferenceTitle, conferenceCity, conferenceUrl, talkTitle, talkUrl, videoUrl, talkDate);
         }
     }
 }

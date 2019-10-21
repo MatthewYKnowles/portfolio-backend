@@ -1,12 +1,14 @@
-﻿using Amazon.DynamoDBv2;
+﻿using System;
+using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 
 namespace Portfolio.Backend.Data.Internal
 {
     public class ConferenceTalksRepository : IConferenceTalksRepository
     {
-        public void SaveTalk(string id, string conferenceTitle, string conferenceCity, string conferenceUrl, string talkTitle, string talkUrl,
-            string videoUrl)
+        public void SaveTalk(string id, string conferenceTitle, string conferenceCity, string conferenceUrl,
+            string talkTitle, string talkUrl,
+            string videoUrl, DateTime talkDate)
         {
             var dbClient = new AmazonDynamoDBClient();
             var context = new DynamoDBContext(dbClient);
@@ -18,7 +20,8 @@ namespace Portfolio.Backend.Data.Internal
                 ConferenceUrl = conferenceUrl,
                 TalkTitle = talkTitle,
                 TalkUrl = talkUrl,
-                VideoUrl = videoUrl
+                VideoUrl = videoUrl,
+                TalkDate = talkDate
             };
             context.SaveAsync(conferenceTalk).Wait();
         }
@@ -34,5 +37,6 @@ namespace Portfolio.Backend.Data.Internal
         [DynamoDBProperty] public string TalkTitle { get; set; }
         [DynamoDBProperty] public string TalkUrl { get; set; }
         [DynamoDBProperty] public string VideoUrl { get; set; }
+        [DynamoDBProperty] public DateTime TalkDate { get; set; }
     }
 }

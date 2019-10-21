@@ -1,4 +1,5 @@
-﻿using Portfolio.Backend.Data.Internal;
+﻿using System;
+using Portfolio.Backend.Data.Internal;
 using Portfolio.Backend.Domain;
 
 namespace Portfolio.Backend.Lambda.ConferenceTalks
@@ -10,7 +11,7 @@ namespace Portfolio.Backend.Lambda.ConferenceTalks
             var conferenceTalksRepository = new ConferenceTalksRepository();
             var addConferenceTalk = new AddConferenceTalk(conferenceTalksRepository);
             addConferenceTalk.Execute(request.ConferenceTitle, request.ConferenceCity, request.ConferenceUrl,
-                request.TalkTitle, request.TalkUrl, request.VideoUrl);
+                request.TalkTitle, request.TalkUrl, request.VideoUrl, request.TalkDate);
         }
     }
 
@@ -21,6 +22,7 @@ namespace Portfolio.Backend.Lambda.ConferenceTalks
         public string ConferenceUrl { get; set; }
         public string TalkTitle { get; set; }
         public string TalkUrl { get; set; }
-        public string VideoUrl { get; set; } 
+        public string VideoUrl { get; set; }
+        public DateTime TalkDate { get; set; }
     }
 }
