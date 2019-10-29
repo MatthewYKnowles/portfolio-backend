@@ -39,6 +39,23 @@ Resources:
       FunctionName: !Sub "${AddConferenceTalk.Arn}"
       Principal: apigateway.amazonaws.com
       SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${PortfolioApi}/*"
+  GetConferenceTalks:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      Handler: Portfolio.Backend.Lambda::Portfolio.Backend.Lambda.ConferenceTalks.ConferenceTalksFunctions::GetConferenceTalks
+      Runtime: "dotnetcore2.1"
+      Code:
+        S3Bucket: !Ref buildBucketName
+        S3Key: !Ref buildObjectKey
+      Timeout: 30
+      Role: !ImportValue GetConferenceTalksRole
+  GetConferenceTalksPermission:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      Action: 'lambda:invokeFunction'
+      FunctionName: !Sub "${GetConferenceTalks.Arn}"
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${PortfolioApi}/*"
   PortfolioApi:
     Type: 'AWS::ApiGateway::RestApi'
     Properties:
@@ -96,6 +113,60 @@ Resources:
           application/json: '{"PlayerOneName": "$input.path(''playerOneName'')", "PlayerTwoName": "$input.path(''playerTwoName'')", "GameResult": "$input.path(''gameResult'')", "WinningPlayer": "$input.path(''winningPlayer'')"}'
       RestApiId: !Ref PortfolioApi
       ResourceId: !Ref ConnectFourResource
+      MethodResponses:
+        - StatusCode: '200'
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Origin: false
+  ConferenceTalkResource:
+    Type: 'AWS::ApiGateway::Resource'
+    Properties:
+      RestApiId: !Ref PortfolioApi
+      ParentId: !GetAtt PortfolioApi.RootResourceId
+      PathPart: conferenceTalk
+  ConferenceTalkOptions:
+    Type: 'AWS::ApiGateway::Method'
+    Properties:
+      AuthorizationType: NONE
+      RestApiId: !Ref PortfolioApi
+      ResourceId: !Ref ConferenceTalkResource
+      HttpMethod: OPTIONS
+      Integration:
+        IntegrationResponses:
+          - StatusCode: '200'
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Methods: '''GET,OPTIONS'''
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+            ResponseTemplates:
+              application/json: ''
+        PassthroughBehavior: WHEN_NO_MATCH
+        RequestTemplates:
+          application/json: '{"statusCode": 200}'
+        Type: MOCK
+      MethodResponses:
+        - StatusCode: '200'
+          ResponseModels:
+            application/json: Empty
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Headers: false
+            method.response.header.Access-Control-Allow-Methods: false
+            method.response.header.Access-Control-Allow-Origin: false
+  ConferenceTalkGet:
+    DependsOn: GetConferenceTalks
+    Type: 'AWS::ApiGateway::Method'
+    Properties:
+      AuthorizationType: NONE
+      HttpMethod: GET
+      Integration:
+        Type: AWS
+        IntegrationHttpMethod: POST
+        Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetConferenceTalks.Arn}/invocations"
+        IntegrationResponses:
+          - StatusCode: '200'
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+      RestApiId: !Ref PortfolioApi
+      ResourceId: !Ref ConferenceTalkResource
       MethodResponses:
         - StatusCode: '200'
           ResponseParameters:

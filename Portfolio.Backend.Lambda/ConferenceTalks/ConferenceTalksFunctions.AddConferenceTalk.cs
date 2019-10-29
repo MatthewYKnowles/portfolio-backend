@@ -4,7 +4,7 @@ using Portfolio.Backend.Domain;
 
 namespace Portfolio.Backend.Lambda.ConferenceTalks
 {
-    public class ConferenceTalksFunctions
+    public partial class ConferenceTalksFunctions
     {
         public void AddConferenceTalk(AddConferenceTalkRequest request)
         {
@@ -14,7 +14,7 @@ namespace Portfolio.Backend.Lambda.ConferenceTalks
                 request.TalkTitle, request.TalkUrl, request.VideoUrl, request.TalkDate);
         }
     }
-
+    
     public class AddConferenceTalkRequest
     {
         public string ConferenceTitle { get; set; }

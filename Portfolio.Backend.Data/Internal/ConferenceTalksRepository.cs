@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 
@@ -7,8 +8,7 @@ namespace Portfolio.Backend.Data.Internal
     public class ConferenceTalksRepository : IConferenceTalksRepository
     {
         public void SaveTalk(string id, string conferenceTitle, string conferenceCity, string conferenceUrl,
-            string talkTitle, string talkUrl,
-            string videoUrl, DateTime talkDate)
+            string talkTitle, string talkUrl, string videoUrl, DateTime talkDate)
         {
             var dbClient = new AmazonDynamoDBClient();
             var context = new DynamoDBContext(dbClient);
@@ -24,6 +24,13 @@ namespace Portfolio.Backend.Data.Internal
                 TalkDate = talkDate
             };
             context.SaveAsync(conferenceTalk).Wait();
+        }
+
+        public IEnumerable<ConferenceTalk> GetConferenceTalks()
+        {
+            var dynamoDbContext = new DynamoDBContext(new AmazonDynamoDBClient());
+            var search = dynamoDbContext.ScanAsync<ConferenceTalk>(null);
+            return search.GetNextSetAsync().Result;
         }
     }
 
