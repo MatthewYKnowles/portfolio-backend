@@ -26,7 +26,7 @@ namespace Portfolio.Backend.Domain
                 TalkUrl = x.TalkUrl,
                 VideoUrl = x.VideoUrl,
                 TalkDate = x.TalkDate
-            });
+            }).OrderByDescending(x => x.TalkDate);
         }
     }
 
